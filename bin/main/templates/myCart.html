@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: head">
+<meta charset="ISO-8859-1">
+<title>PizzaServiceApp</title>
+</head>
+<body>
+	<div th:include="fragments/body :: nav (all)"
+		style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+	<div class="container">
+		<div th:if="${error!=null}">
+			<p class="error-message text-center" th:text="${error}"></p>
+		</div>
+		<div th:if="${myItems !=null}">
+			<table class="table table-bordered">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Quantity</th>
+						<th scope="col">Name</th>
+						<th scope="col">PizzaSize</th>
+						<th scope="col">TotalPrice</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="item : ${myItems}">
+						<td class="word-wrap" th:text="${item.quantity}">Default
+							value</td>
+						<td class="word-wrap" th:text="${item.name}">Default value</td>
+						<td class="word-wrap" th:text="${item.size}">Default value</td>
+						<td class="word-wrap" th:text="${item.totalPrice}">Default
+							value</td>
+					</tr>
+
+
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+	<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <head th:include="fragments/header :: head">
+
+    </head>
+
+<body>
+
+<div th:include="fragments/body :: nav (all)"
+     style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+
+<br>
+
+<div class="container">
+
+    <h5>Please fill in the information below: </h5>
+    <form class="bs-example error" th:action="@{/users/create}"
+          th:object="${myform}" method="post" role="form">
+
+        <input type="text" name="nickname" class="form-control register-input"
+               placeholder="Username" required="required" autofocus="autofocus">
+        <input type="text" name="email" class="form-control register-input"
+               placeholder="Email" required="required">
+
+        <input type="text" name="name" class="form-control register-input"
+               placeholder="First name" required="required" autofocus="autofocus">
+        <input type="text" name="lastName" class="form-control register-input"
+               placeholder="Last name" required="required">
+        <input type="password"
+               name="password" class="form-control register-input"
+               placeholder="Password" required="required">
+        <input type="password"
+               name="passwordRepeated" class="form-control register-input"
+               placeholder="Repeat password" required="required"> <br>
+        <div class="error">
+            <input type="submit" class="btn btn-success margin-5dp"
+                   th:value="REGISTER">
+            <a><span class="error text-danger"
+                     th:if="${error}"
+                     th:text="${error}">The email or password
+						you have entered is invalid, try again.</span></a>
+        </div>
+    </form>
+
+
+</div>
+
+<br>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

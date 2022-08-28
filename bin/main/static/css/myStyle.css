@@ -1,0 +1,16 @@
+.username {
+	padding-left: 20px;
+	padding-bottom: 20px;
+	color: #28A745;
+}
+
+.control-button {
+	margin-right: 10px !important;
+}
+
+.error-message
+{
+	
+	color: red;
+	font-size: 18px;
+}

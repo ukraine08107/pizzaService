@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: head">
+    <meta charset="ISO-8859-1">
+    <title>PizzaServiceApp</title>
+</head>
+<body>
+<div th:include="fragments/body :: nav (all)"
+     style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+<div class="container">
+    <div class="font-weight-bold username">
+        <span th:text="'USERNAME:  '+${currentUser.username}"></span>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Menge</th>
+            <th scope="col">Pizza</th>
+            <th scope="col">Preis+Grosse</th>
+            <th scope="col">Warenkorb</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pizza : ${listAllPizzas}">
+            <form method="POST"
+                  th:action="@{/add}">
+                <!--th:action="@{/add(quantity=${quantity}, id =${pizza.id}, size=${size})}">-->
+
+
+                <td><input type="number" name="quantity" class="form-control" required="true"  min="1"/></td>
+                <input type="number" th:value="${pizza.id}" name="id" class="form-control" hidden/>
+                <td class="word-wrap" th:text="${pizza.name}" name ="name" >Default value</td>
+                <td><select class="selectpicker" name="size">
+                    <option value="small" th:text="'Small/'+${pizza.priceSmall}"></option>
+                    <option value="medium" th:text="'Medium/'+${pizza.priceMedium}"></option>
+                    <option value="large" th:text="'Large/'+${pizza.priceLarge}"></option>
+                </select></td>
+                <td><input class="btn btn-success" type="submit" value="In den Warenkorb"/></td>
+            </form>
+        </tr>
+
+        </tbody>
+    </table>
+    <div th:if="${error!=null}"><span class="error-message" th:text="${error}"></span></div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

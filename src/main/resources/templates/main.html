@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: head">
+    <meta charset="ISO-8859-1">
+    <title>PizzaServiceApp</title>
+</head>
+<body>
+<div th:include="fragments/body :: nav (all)"
+     style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+<div class="container">
+
+
+    <div th:if="${added}">
+        <br>
+        <div class="alert alert-danger">
+            <span>Item has been added to cart! </span>
+        </div>
+    </div>
+
+    <div class="table table-bordered">
+
+            <div th:each="pizza : ${listAllPizzas}" class="child">
+                <form method="POST" th:action="@{/add}">
+                <img th:src="@{'img/' + ${pizza.imagePath}}" style="width: 300px; height: 200px;">
+                <div th:text="${pizza.name}" name="name">Default value</div>
+                <div>
+                    <select class="selectpicker" name="size">
+                        <option value="small" th:text="'Small/'+${pizza.priceSmall}"></option>
+                        <option value="medium" th:text="'Medium/'+${pizza.priceMedium}"></option>
+                        <option value="large" th:text="'Large/'+${pizza.priceLarge}"></option>
+                    </select>
+                </div>
+                <div>
+                    <input type="number" name="quantity" required="true" class="form-control" min="1"/>
+                    <input type="number" th:value="${pizza.id}" name="id" class="form-control" hidden/>
+                </div>
+                <div>
+                    <input class="btn btn-success add-to-cart" type="submit" value="Add to Cart"/>
+                </div>
+        </form>
+            </div>
+
+    </div>
+    <div th:if="${error!=null}"><span class="error-message" th:text="${error}"></span></div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

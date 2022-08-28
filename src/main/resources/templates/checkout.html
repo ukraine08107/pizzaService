@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: head">
+    <meta charset="ISO-8859-1">
+    <title>PizzaServiceApp</title>
+</head>
+<body>
+<div th:include="fragments/body :: nav (all)"
+     style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+<div class="container">
+    <form method="POST" th:action="@{/pay}"
+          th:object="${address}" role="form">
+        <span th:text="'Order total('+${totalItems}+' items): '" style="font-size:25px;"> </span>
+        <span id="money-amount" th:text="'$'+${totalMoney}" style="font-size:25px;"></span>
+
+        <div class="form-group">
+            <h1 style="color: #28A745;">Delivery address</h1>
+            <h6>Please indicate your delivery address in the form below. Your delivery address is the address where you
+                would
+                like your order to be delivered. Please note that it might take from 30-40 minutes to prepare your
+                order! </h6>
+            <!--   <div>
+                   <input type="text" name="name" required="true" placeholder="*NAME" class="form-control col-md-4 custom-input"/>
+                   <input type="text" name="lastname" required="true" placeholder="*LAST NAME"
+                          class="form-control col-md-4 name custom-input"/>
+               </div>-->
+            <div>
+                <input type="text" name="street" required="true" placeholder="*STREET ADDRESS"
+                       class="form-control custom-input"/>
+            </div>
+            <div>
+                <input type="text" name="houseNumber" required="true" placeholder="*HOUSE NUMBER"
+                       class="form-control col-md-4 custom-input"/>
+                <input type="text" name="town" required="true" placeholder="*CITY/TOWN"
+                       class="form-control col-md-4 custom-input"/>
+                <input type="text" name="postalCode" required="true" placeholder="*ZIP CODE"
+                       class="form-control col-md-4 name custom-input"/>
+            </div>
+            <!-- <div style="margin-top: 20px;">
+                 <h6>Please indicate your current moblie phone number. *Note that it will be needed for the
+                     delivery* </h6>
+                 <input type="text" name="lastname" required="true" placeholder="*PHONE NUMBER" class="form-control custom-input"/>
+             </div>-->
+            <input type="submit" class="btn btn-primary btn-block delete-button" th:value="PAY" style="width: 200px; margin-left: 20px; margin-top: 20px;">
+        </div>
+    </form>
+
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

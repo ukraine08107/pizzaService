@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/header :: head">
+    <meta charset="ISO-8859-1">
+    <title>PizzaServiceApp</title>
+</head>
+<body>
+<div th:include="fragments/body :: nav (all)"
+     style="margin-top: 50px; margin-bottom: 50px !important;"></div>
+<div class="container">
+    <div th:if="${error!=null}">
+        <p class="error-message text-center" th:text="${error}"></p>
+    </div>
+    <div th:if="${myItems !=null}">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">Name</th>
+                <th scope="col">PizzaSize</th>
+                <th scope="col">TotalPrice</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="item : ${myItems}">
+                <form method="GET" th:action="@{/delete/{id}(id=${item.itemId})}">
+                    <td class="word-wrap quantity" th:text="${item.quantity}">Default
+                        value
+                    </td>
+                    <td class="word-wrap" th:text="${item.name}">Default value</td>
+                    <td class="word-wrap" th:text="${item.size}">Default value</td>
+                    <td class="word-wrap" th:text="${item.totalPrice}">Default
+                        value
+                    </td>
+                    <td id="delete-btn" style="width: 100px !important;">
+                        <!--<input type="submit" class="btn btn-primary btn-block delete-button" th:value="Delete">-->
+                        <!--<a th:href="@{/delete/{id}(id=${item.itemId})}" class="btn btn-primary btn-block delete-button"> Delete </a>-->
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+
+        </table>
+        <a th:href="@{/delete}" class="btn btn-primary btn-block delete-button" style="width: 200px !important; float: right; margin-right: 50px;"> Delete all</a>
+        <div class="total-info">
+                <span th:text="'Subtotal('+${totalItems}+' items): '"> </span>
+                <span id="money-amount" th:text="'$'+${totalMoney}"></span>
+
+        <form class="form-inline" th:action="@{/checkout}" method="GET">
+
+            <button class="btn btn-warning control-button" type="submit">
+                 Proceed to checkout
+            </button>
+
+        </form>
+        </div>
+    </div>
+</div>
+<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>
